@@ -1,7 +1,5 @@
 
-const Room = require('./model');
-const Message = require('../message/model');
-const User = require('../user/model');
+const { Room, Message, User } = require('database-module/models');
 const { NotFoundHttpException } = require('../../common/errors');
 
 const list = (req, res, next) => Room.findAll()
