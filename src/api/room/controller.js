@@ -1,6 +1,6 @@
 
 const { Room, Message, User } = require('database-module/models');
-const { NotFoundHttpException } = require('../../common/errors');
+const { NotFoundHttpException } = require('errors-list/http-errors');
 
 const list = (req, res, next) => Room.findAll()
   .then(rooms => res.status(200).send(rooms))

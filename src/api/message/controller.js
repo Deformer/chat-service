@@ -1,6 +1,6 @@
 
 const { Message, Room, User } = require('database-module/models');
-const { NotFoundHttpException } = require('../../common/errors');
+const { NotFoundHttpException } = require('errors-list/http-errors');
 
 const create = (req, res, next) => Room.find({ where: { id: req.body.roomId } })
   .then((room) => {

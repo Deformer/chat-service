@@ -1,6 +1,6 @@
 const { get } = require('lodash');
 
-const { UnauthorizedHttpException } = require('../../common/errors');
+const { UnauthorizedHttpException } = require('errors-list/http-errors');
 
 const checkAuth = (req, res, next) => {
   const userId = get(req, 'session.userId', null);
