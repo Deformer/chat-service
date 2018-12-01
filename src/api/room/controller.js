@@ -1,6 +1,7 @@
 
 const Room = require('./model');
 const Message = require('../message/model');
+const User = require('../user/model');
 const { NotFoundHttpException } = require('../../common/errors');
 
 const list = (req, res, next) => Room.findAll()
@@ -14,8 +15,15 @@ const messageList = (req, res, next) => Room.find({ where: { id: req.params.room
     }
 
     return Message.findAll({
+      attributes: ['text'],
       where: { roomId: req.params.roomId },
-      include: ['user', 'room'],
+      include: [{
+        model: User,
+        attributes: ['name', 'id'],
+      }, {
+        model: Room,
+        attributes: ['title', 'id'],
+      }],
     });
   })
   .then(messages => res.status(200).json(messages)) // TODO Don't send passhashes
