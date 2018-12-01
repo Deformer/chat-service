@@ -20,13 +20,12 @@ const User = sequelize.define('user', {
 });
 
 
-User.prototype.toClient = function () {
-  const { id, name, login } = this;
-  return ({
-    id,
-    name,
-    login,
-  });
+User.prototype.toJSON = function () {
+  const values = Object.assign({}, this.get());
+
+  delete values.passwordHash;
+  delete values.passwordSalt;
+  return values;
 };
 
 User.login = ({ login, password }) => User.findOne({ where: { login } }).then((user) => {
