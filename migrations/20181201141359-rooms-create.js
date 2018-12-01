@@ -20,5 +20,7 @@ module.exports = {
     },
   }),
 
+  // TODO create messages here
+
   down: (queryInterface, Sequelize) => queryInterface.dropTable('rooms'),
 };

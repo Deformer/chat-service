@@ -26,8 +26,9 @@ const messageList = (req, res, next) => Room.find({ where: { id: req.params.room
       }],
     });
   })
-  .then(messages => res.status(200).json(messages)) // TODO Don't send passhashes
+  .then(messages => res.status(200).json(messages))
   .catch(err => next(err));
+
 
 module.exports = {
   list,
