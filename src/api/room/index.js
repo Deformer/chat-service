@@ -4,6 +4,7 @@ const validator = require('express-joi-validation')({
 });
 
 const { list, messageList } = require('./controller');
+const { messageListSchema } = require('./validationSchema');
 
 const router = new Router();
 
@@ -11,6 +12,7 @@ router.get('/',
   list);
 
 router.get('/:roomId/messages',
+  validator.params(messageListSchema),
   messageList);
 
 module.exports = router;
