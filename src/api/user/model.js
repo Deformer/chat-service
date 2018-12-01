@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const { sequelize } = require('../../services/postgres');
 const { compare } = require('../../services/password-hash');
-const { NotFoundHttpException, BadRequestHttpException } = require('../../common/errors');
+const { BadRequestHttpException } = require('../../common/errors');
 
 const User = sequelize.define('user', {
   id: {
@@ -18,6 +18,7 @@ const User = sequelize.define('user', {
     unique: true,
   },
 });
+
 
 User.prototype.toClient = function () {
   const { id, name, login } = this;
