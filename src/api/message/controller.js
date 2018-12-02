@@ -1,6 +1,7 @@
-
 const { Message, Room, User } = require('database-module/models');
 const { NotFoundHttpException } = require('errors-list/http-errors');
+
+const { sendMessageToRoom } = require('../../services/message-sender');
 
 const create = (req, res, next) => Room.find({ where: { id: req.body.roomId } })
   .then((room) => {
@@ -9,7 +10,6 @@ const create = (req, res, next) => Room.find({ where: { id: req.body.roomId } })
     }
 
     const messagePayload = Object.assign({}, req.body, { userId: req.session.userId });
-
     return Message.create(messagePayload);
   })
   .then(({ id }) => Message.find({
@@ -23,7 +23,10 @@ const create = (req, res, next) => Room.find({ where: { id: req.body.roomId } })
       attributes: ['title', 'id'],
     }],
   }))
-  .then(message => res.status(200).json(message))
+  .then((message) => {
+    sendMessageToRoom(message);
+    res.status(200).json(message);
+  })
   .catch(err => next(err));
 
 module.exports = {
