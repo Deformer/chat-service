@@ -1,4 +1,3 @@
-
 const { Room, Message, User } = require('database-module/models');
 const { NotFoundHttpException } = require('errors-list/http-errors');
 

@@ -25,7 +25,7 @@ const create = (req, res, next) => Room.find({ where: { id: req.body.roomId } })
   }))
   .then((message) => {
     sendMessageToRoom(message);
-    res.status(200).json(message);
+    res.status(201).json(message);
   })
   .catch(err => next(err));
 
